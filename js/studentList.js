@@ -1,10 +1,16 @@
-fetch('http://localhost:8080/student/findAll')
-  .then((response) => {
-    if (!response.ok) {
+fetch('http://localhost:8080/student/findAll', {
+  credentials: 'include' // Include credentials for session-based authentication
+})
+.then(response => {
+  if (response.status === 401) { // Unauthorized
+      window.location.href = '/login'; // Redirect to login if not authenticated
+      return;
+  }
+  if (!response.ok) {
       throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
+  }
+  return response.json();
+})
   .then((data) => {
     const studentTable = document.getElementById('studentTableBody');
 

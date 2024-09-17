@@ -1,0 +1,46 @@
+h2 {
+    text-align: center;
+    padding-top: 40px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    text-align: center;
+  }
+  
+  td {
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    float:right;
+}
+.student-list-button {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+#logout-button {
+    background-color: #f24c4c;
+    border-radius: 5%; /* Red background for logout */
+}
+#add-student-button {
+    background-color: #43e243; /* Green background for add student */
+    border-radius: 5%; 
+}
