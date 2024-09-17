@@ -16,7 +16,7 @@ import com.example.demo.service.StudentService;
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 public class StudentController {
 
-    private final StudentService studentService;
+    private StudentService studentService;
 
     @Autowired
     public StudentController(StudentService studentService) {

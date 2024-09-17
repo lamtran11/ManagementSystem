@@ -1,13 +1,12 @@
 -- DROP TABLES if they exist (to avoid conflicts when re-running the script)
-DROP TABLE IF EXISTS course_departments;
-DROP TABLE IF EXISTS course_instructors;
-DROP TABLE IF EXISTS enrollments;
-DROP TABLE IF EXISTS instructors;
-DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS students;
-DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS user_roles;
+DROP TABLE IF EXISTS course_departments CASCADE;
+DROP TABLE IF EXISTS course_instructors CASCADE;
+DROP TABLE IF EXISTS enrollments CASCADE;
+DROP TABLE IF EXISTS instructors CASCADE;
+DROP TABLE IF EXISTS courses CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS departments CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
 
 -- Table: students
 CREATE TABLE students (
@@ -39,19 +38,21 @@ CREATE TABLE enrollments (
 
 -- Table: instructors
 CREATE TABLE instructors (
-                             instructor_id SERIAL PRIMARY KEY,
+                             instructor_id VARCHAR(50) PRIMARY KEY,
                              first_name VARCHAR(50) NOT NULL,
                              last_name VARCHAR(50) NOT NULL,
                              email VARCHAR(100) UNIQUE NOT NULL,
                              hire_date DATE,
-                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                             password CHAR(68) NOT NULL,
+                             active SMALLINT NOT NULL
 );
 
 -- Table: course_instructors (assign instructors to courses)
 CREATE TABLE course_instructors (
                                     course_instructor_id SERIAL PRIMARY KEY,
                                     course_id INT REFERENCES courses(course_id) ON DELETE CASCADE,
-                                    instructor_id INT REFERENCES instructors(instructor_id) ON DELETE CASCADE,
+                                    instructor_id VARCHAR(50) REFERENCES instructors(instructor_id) ON DELETE CASCADE,
                                     assigned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -70,21 +71,11 @@ CREATE TABLE course_departments (
                                     assigned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Table: roles (defines different roles, e.g., admin, instructor)
+-- Table: roles (defines roles linked to instructors)
 CREATE TABLE roles (
-                       role_id SERIAL PRIMARY KEY,
-                       role_name VARCHAR(50) UNIQUE NOT NULL
+                       instructor_id VARCHAR(50) PRIMARY KEY REFERENCES instructors(instructor_id) ON DELETE CASCADE,
+                       role_name VARCHAR(50) NOT NULL
 );
-
--- Table: user_roles (links users (instructors) to roles)
-CREATE TABLE user_roles (
-                            user_role_id SERIAL PRIMARY KEY,
-                            user_id INT REFERENCES instructors(instructor_id) ON DELETE CASCADE,
-                            role_id INT REFERENCES roles(role_id) ON DELETE CASCADE,
-                            assigned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
 
 -- Insert students with Japanese names
 INSERT INTO students (first_name, last_name, email, birthdate, address)
@@ -101,23 +92,29 @@ VALUES
     ('コンピュータサイエンス', 'プログラミング入門', 5);
 
 -- Insert instructors with Japanese names
-INSERT INTO instructors (first_name, last_name, email, hire_date)
+INSERT INTO instructors (instructor_id, first_name, last_name, email, hire_date, password, active)
 VALUES
-    ('ゆき', '鈴木', 'yuki.suzuki@example.com', '2015-05-11'),
-    ('けん', '伊藤', 'ken.ito@example.com', '2018-09-02');
+    ('yuki', 'ゆき', '鈴木', 'yuki.suzuki@example.com', '2015-05-11', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('ken', 'けん', '伊藤', 'ken.ito@example.com', '2018-09-02', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('hiro', 'ひろ', '佐々木', 'hiro.sasaki@example.com', '2020-01-15', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('nao', 'なお', '高橋', 'nao.takahashi@example.com', '2021-04-22', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('riku', 'りく', '松本', 'riku.matsumoto@example.com', '2022-07-08', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1);
 
 -- Insert departments with Japanese names
-INSERT INTO departments (department_name)
+INSERT INTO departments (department_id, department_name)
 VALUES
-    ('科学部'),
-    ('工学部'),
-    ('人文学部');
+    (1, '科学部'),
+    (2, '工学部'),
+    (3, '人文学部');
 
--- Insert roles
-INSERT INTO roles (role_name)
+-- Insert roles with Japanese names and link to instructors
+INSERT INTO roles (instructor_id, role_name)
 VALUES
-    ('管理者'),
-    ('講師');
+    ('yuki', '管理者'),  -- ゆき as 管理者
+    ('ken', '講師'),     -- けん as 講師
+    ('hiro', '講師'),    -- ひろ as 講師
+    ('nao', '講師'),     -- なお as 講師
+    ('riku', '講師');    -- りく as 講師
 
 -- Link courses and departments
 INSERT INTO course_departments (course_id, department_id)
@@ -129,15 +126,12 @@ VALUES
 -- Assign instructors to courses
 INSERT INTO course_instructors (course_id, instructor_id)
 VALUES
-    (1, 1),  -- ゆき teaching 数学
-    (2, 2),  -- けん teaching 物理学
-    (3, 2);  -- けん teaching コンピュータサイエンス
-
--- Assign roles to instructors
-INSERT INTO user_roles (user_id, role_id)
-VALUES
-    (1, 1),  -- ゆき as 管理者
-    (2, 2);  -- けん as 講師
+    (1, 'yuki'),  -- ゆき teaching 数学
+    (2, 'ken'),   -- けん teaching 物理学
+    (3, 'ken'),   -- けん teaching コンピュータサイエンス
+    (1, 'hiro'),  -- ひろ teaching 数学
+    (2, 'nao'),   -- なお teaching 物理学
+    (3, 'riku');  -- りく teaching コンピュータサイエンス
 
 -- Enroll students in courses
 INSERT INTO enrollments (student_id, course_id)
@@ -148,11 +142,12 @@ VALUES
     (1, 2); -- 太郎 enrolled in 物理学
 
 
-
-
-
-
-
-
+-- Update roles to use ROLE_ADMIN and ROLE_TEACHER
+UPDATE roles
+SET role_name = CASE
+                    WHEN role_name = '管理者' THEN 'ROLE_ADMIN'
+                    WHEN role_name = '講師' THEN 'ROLE_TEACHER'
+                    ELSE role_name
+END;
 
 
