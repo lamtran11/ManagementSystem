@@ -27,6 +27,11 @@ public class StudentController {
     public List<Student> getAllStudents() {
         return studentService.findAllStudents();
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Return the name of the login view (e.g., login.html)
+    }
 }
 
 

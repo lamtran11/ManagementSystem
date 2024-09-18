@@ -43,17 +43,6 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
-                .formLogin(form ->
-                        form
-                                .loginPage("/login")
-                                .permitAll()
-                                .defaultSuccessUrl("/index.html", true) // Redirect to index.html on successful login
-                )
-                .logout(logout ->
-                        logout
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login?logout") // Redirect to login page after logout
-                )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults()); // Enable CORS

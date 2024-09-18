@@ -1,11 +1,19 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
 public class Student {
+    //represent the core user information that is necessary for authentication and authorization.
+    //Implement this interface is key for custom how user information is retrieved and used within security context in this app
 
     // define fields
     @Id
@@ -114,4 +122,6 @@ public class Student {
                 ", createdAt=" + createdAt +
                 '}';
     }
+
+
 }

@@ -2,17 +2,23 @@ package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "instructors")
-public class Instructor {
+public class Instructor implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "instructor_id")
-    private int instructorId;
+    private String instructorId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -29,22 +35,30 @@ public class Instructor {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
+    @Column(name="password")
+    private String password;
+
     public Instructor() {}
 
-    public Instructor(int instructorId, String firstName, String lastName, String email, LocalDate hireDate, LocalDate createdAt) {
+    public Instructor(String instructorId, String firstName, String lastName, String email, LocalDate hireDate, LocalDate createdAt, String password) {
         this.instructorId = instructorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.hireDate = hireDate;
         this.createdAt = createdAt;
+        this.password = password;
     }
 
-    public int getInstructorId() {
+    public String getInstructorId() {
         return instructorId;
     }
 
-    public void setInstructorId(int instructorId) {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setInstructorId(String instructorId) {
         this.instructorId = instructorId;
     }
 
@@ -98,5 +112,43 @@ public class Instructor {
                 ", hireDate=" + hireDate +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return instructorId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

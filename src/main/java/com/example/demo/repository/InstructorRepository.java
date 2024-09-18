@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface InstructorRepository extends JpaRepository<Instructor, String> {
 
-    // Optional: custom query methods, if needed
-
+    Optional<Instructor> findByInstructorId(String instructorId);
 }
