@@ -1,6 +1,6 @@
 //package com.example.demo.config;
 //
-//import com.example.demo.repository.InstructorRepository;
+//import com.example.demo.repository.UserRepository;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -18,11 +18,11 @@
 //@RequiredArgsConstructor
 //public class ApplicationConfig {
 //
-//    private final InstructorRepository repository;
+//    private final UserRepository userRepository;
 //
 //    @Bean
 //    public UserDetailsService userDetailsService() {
-//        return username -> repository.findByInstructorId(instructorId);
+//        return instructorId -> userRepository.findByName(instructorId)
 //                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 //    }
 //
@@ -34,10 +34,10 @@
 //        return authProvider;
 //    }
 //
-//    @Bean
-//    public AuditorAware<Integer> auditorAware() {
-//        return new ApplicationAuditAware();
-//    }
+////    @Bean
+////    public AuditorAware<Integer> auditorAware() {
+////        return new ApplicationAuditAware();
+////    }
 //
 //    @Bean
 //    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -48,5 +48,4 @@
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-//
 //}
