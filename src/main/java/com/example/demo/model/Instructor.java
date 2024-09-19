@@ -2,11 +2,6 @@ package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.UserDetailsManager;
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;

@@ -15,21 +15,21 @@ public class Enrollment {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id")
-    private Student student;
+    private Student studentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
-    private Course course;
+    private Course courseId;
 
     @Column(name = "enrollment_date")
     private LocalDate enrollmentDate;
 
     public Enrollment() {}
 
-    public Enrollment(int enrollment_id, Student student, Course course, LocalDate enrollmentDate) {
+    public Enrollment(int enrollment_id, Student studentId, Course courseId, LocalDate enrollmentDate) {
         this.enrollment_id = enrollment_id;
-        this.student = student;
-        this.course = course;
+        this.studentId = studentId;
+        this.courseId = courseId;
         this.enrollmentDate = enrollmentDate;
     }
 
@@ -41,20 +41,20 @@ public class Enrollment {
         this.enrollment_id = enrollment_id;
     }
 
-    public Student getStudent() {
-        return student;
+    public Student getStudentId() {
+        return studentId;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudentId(Student studentId) {
+        this.studentId = studentId;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(Course courseId) {
+        this.courseId = courseId;
     }
 
     public LocalDate getEnrollmentDate() {
@@ -63,15 +63,5 @@ public class Enrollment {
 
     public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Enrollment{" +
-                "enrollment_id=" + enrollment_id +
-                ", student=" + student +
-                ", course=" + course +
-                ", enrollmentDate=" + enrollmentDate +
-                '}';
     }
 }

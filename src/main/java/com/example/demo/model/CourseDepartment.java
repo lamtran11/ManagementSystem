@@ -15,21 +15,21 @@ public class CourseDepartment {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
-    private Course course;
+    private Course courseId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
-    private Department department;
+    private Department departmentId;
 
     @Column(name = "assigned_date")
     private LocalDate assignedDate;
 
     public CourseDepartment() {}
 
-    public CourseDepartment(int courseDepartmentId, Course course, Department department, LocalDate assignedDate) {
+    public CourseDepartment(int courseDepartmentId, Course courseId, Department departmentId, LocalDate assignedDate) {
         this.courseDepartmentId = courseDepartmentId;
-        this.course = course;
-        this.department = department;
+        this.courseId = courseId;
+        this.departmentId = departmentId;
         this.assignedDate = assignedDate;
     }
 
@@ -41,20 +41,20 @@ public class CourseDepartment {
         this.courseDepartmentId = courseDepartmentId;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourseId() {
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(Course courseId) {
+        this.courseId = courseId;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Department getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(Department departmentId) {
+        this.departmentId = departmentId;
     }
 
     public LocalDate getAssignedDate() {
@@ -63,15 +63,5 @@ public class CourseDepartment {
 
     public void setAssignedDate(LocalDate assignedDate) {
         this.assignedDate = assignedDate;
-    }
-
-    @Override
-    public String toString() {
-        return "CourseDepartment{" +
-                "courseDepartmentId=" + courseDepartmentId +
-                ", course=" + course +
-                ", department=" + department +
-                ", assignedDate=" + assignedDate +
-                '}';
     }
 }
