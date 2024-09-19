@@ -1,46 +1,44 @@
-// studentList.js
-fetch('http://localhost:8080/student/findAll', {
-  credentials: 'include' // Include credentials for session-based authentication
-})
-.then(response => {
-  if (response.status === 401) { // Unauthorized
-      console.log('Redirecting to login page');
-      window.location.href = '/form/login-form.html'; // Redirect to login if not authenticated
-      return;
-  }
-  if (!response.ok) {
-      throw new Error('Network response was not ok');
-  }
-  return response.json();
-})
-.then((data) => {
-  const studentTable = document.getElementById('studentTableBody');
+fetch('http://localhost:8080/api/student/findAll')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        const studentTable = document.getElementById('studentTableBody');
+        studentTable.innerHTML = ''; // Clear the table before appending new data
 
-  studentTable.innerHTML = ''; // Clear the table before appending new data
+        data.forEach((entry) => {
+            const row = document.createElement('tr');
 
-  data.forEach((student) => {
-    const row = document.createElement('tr');
+            const idCell = document.createElement('td');
+            idCell.textContent = entry.studentId || '未定義'; // '未定義' = 'undefined'
+            row.appendChild(idCell);
 
-    const idCell = document.createElement('td');
-    idCell.textContent = student.studentId || '未定義'; // '未定義' = 'undefined'
-    row.appendChild(idCell);
+            const firstNameCell = document.createElement('td');
+            firstNameCell.textContent = entry.firstName || '未定義';
+            row.appendChild(firstNameCell);
 
-    const firstNameCell = document.createElement('td');
-    firstNameCell.textContent = student.firstName || '未定義';
-    row.appendChild(firstNameCell);
+            const lastNameCell = document.createElement('td');
+            lastNameCell.textContent = entry.lastName || '未定義';
+            row.appendChild(lastNameCell);
 
-    const lastNameCell = document.createElement('td');
-    lastNameCell.textContent = student.lastName || '未定義';
-    row.appendChild(lastNameCell);
+            const emailCell = document.createElement('td');
+            emailCell.textContent = entry.email || '未定義';
+            row.appendChild(emailCell);
 
-    const emailCell = document.createElement('td');
-    emailCell.textContent = student.email || '未定義';
-    row.appendChild(emailCell);
+            const departmentCell = document.createElement('td');
+            departmentCell.textContent = entry.departmentName || '未定義';
+            row.appendChild(departmentCell);
 
-    // Append the row to the student table body
-    studentTable.appendChild(row);
-  });
-})
-.catch((error) => {
-  console.error('There has been a problem with your fetch operation:', error);
-});
+            const courseCell = document.createElement('td');
+            courseCell.textContent = entry.courseName || '未定義';
+            row.appendChild(courseCell);
+
+            studentTable.appendChild(row);
+        });
+    })
+    .catch((error) => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
