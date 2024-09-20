@@ -1,3 +1,5 @@
+//Fetch data from dbs to table
+
 fetch('http://localhost:8080/api/student/findAll')
     .then((response) => {
         if (!response.ok) {
@@ -13,27 +15,27 @@ fetch('http://localhost:8080/api/student/findAll')
             const row = document.createElement('tr');
 
             const idCell = document.createElement('td');
-            idCell.textContent = entry.studentId || '未定義'; // '未定義' = 'undefined'
+            idCell.textContent = entry.studentId || '...'; // '...' = 'undefined'
             row.appendChild(idCell);
 
             const firstNameCell = document.createElement('td');
-            firstNameCell.textContent = entry.firstName || '未定義';
+            firstNameCell.textContent = entry.firstName || '...';
             row.appendChild(firstNameCell);
 
             const lastNameCell = document.createElement('td');
-            lastNameCell.textContent = entry.lastName || '未定義';
+            lastNameCell.textContent = entry.lastName || '...';
             row.appendChild(lastNameCell);
 
             const emailCell = document.createElement('td');
-            emailCell.textContent = entry.email || '未定義';
+            emailCell.textContent = entry.email || '...';
             row.appendChild(emailCell);
 
             const departmentCell = document.createElement('td');
-            departmentCell.textContent = entry.departmentName || '未定義';
+            departmentCell.textContent = entry.departmentName || '...';
             row.appendChild(departmentCell);
 
             const courseCell = document.createElement('td');
-            courseCell.textContent = entry.courseName || '未定義';
+            courseCell.textContent = entry.courseName || '...';
             row.appendChild(courseCell);
 
             studentTable.appendChild(row);
@@ -42,3 +44,6 @@ fetch('http://localhost:8080/api/student/findAll')
     .catch((error) => {
         console.error('There has been a problem with your fetch operation:', error);
     });
+
+
+//Add new student to dbs
