@@ -9,5 +9,8 @@ public interface StudentService {
 
     List<StudentInformation> findAllStudentCourseEnrollments();
 
+    Student getStudentByLastName(String lastName);
+
+    Student getStudentByEmail(String email);
 }
 

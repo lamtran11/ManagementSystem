@@ -5,7 +5,6 @@ import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +40,16 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return dtoList;
+    }
+
+    @Override
+    public Student getStudentByLastName(String lastName) {
+        return null;
+    }
+
+    @Override
+    public Student getStudentByEmail(String email) {
+        return null;
     }
 
 

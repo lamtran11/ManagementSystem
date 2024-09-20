@@ -25,14 +25,27 @@ public class Course {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public Course() {}
 
-    public Course(LocalDate createdAt, int creditHours, String description, String courseName, int courseId) {
+    public Course(LocalDate createdAt, int creditHours, String description, String courseName, int courseId, Department department) {
         this.createdAt = createdAt;
         this.creditHours = creditHours;
         this.description = description;
         this.courseName = courseName;
         this.courseId = courseId;
+        this.department = department;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public int getCourseId() {

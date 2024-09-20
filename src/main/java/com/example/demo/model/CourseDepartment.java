@@ -33,6 +33,7 @@ public class CourseDepartment {
         this.assignedDate = assignedDate;
     }
 
+
     public int getCourseDepartmentId() {
         return courseDepartmentId;
     }

@@ -151,3 +151,100 @@ SET role_name = CASE
 END;
 
 
+-- Insert additional students (10 records)
+INSERT INTO students (first_name, last_name, email, birthdate, address)
+VALUES
+    ('さくら', '藤田', 'sakura.fujita@example.com', '2000-03-14', '123 名古屋市, 愛知'),
+    ('まさと', '森', 'masato.mori@example.com', '1998-08-07', '456 福岡市, 福岡'),
+    ('ひな', '加藤', 'hina.kato@example.com', '2001-12-02', '789 川崎市, 神奈川'),
+    ('かずみ', '中村', 'kazumi.nakamura@example.com', '2000-10-10', '987 横浜市, 神奈川'),
+    ('けんじ', '山口', 'kenji.yamaguchi@example.com', '1999-09-01', '654 札幌市, 北海道'),
+    ('えりか', '井上', 'erika.inoue@example.com', '2001-01-19', '321 京都市, 京都'),
+    ('ゆうた', '岡田', 'yuta.okada@example.com', '2002-04-22', '654 仙台市, 宮城'),
+    ('まゆ', '高橋', 'mayu.takahashi@example.com', '2000-06-13', '345 神戸市, 兵庫'),
+    ('さとる', '松田', 'satoru.matsuda@example.com', '1998-02-05', '432 静岡市, 静岡'),
+    ('かなえ', '田村', 'kanae.tamura@example.com', '2002-11-28', '765 大阪市, 大阪');
+
+-- Insert additional courses (10 records)
+INSERT INTO courses (course_name, description, credit_hours)
+VALUES
+    ('生物学', '基礎的な生物学コース', 4),
+    ('日本史', '日本の歴史の概要', 3),
+    ('統計学', 'データ解析と統計', 5),
+    ('化学', '有機化学と無機化学', 4),
+    ('哲学', '西洋哲学の歴史', 3),
+    ('機械工学', '機械設計の基本', 5),
+    ('経済学', 'マクロ経済とミクロ経済', 4),
+    ('言語学', '言語の構造と意味論', 3),
+    ('心理学', '心理学の基本理論', 4),
+    ('情報技術', 'コンピュータ技術の基礎', 5);
+
+-- Insert additional instructors (10 records)
+INSERT INTO instructors (instructor_id, first_name, last_name, email, hire_date, password, active)
+VALUES
+    ('tomoya', 'ともや', '藤井', 'tomoya.fujii@example.com', '2017-03-15', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('yoko', 'ようこ', '安田', 'yoko.yasuda@example.com', '2019-09-20', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('daisuke', 'だいすけ', '今井', 'daisuke.imai@example.com', '2016-05-10', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('jun', 'じゅん', '石田', 'jun.ishida@example.com', '2020-07-05', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('ayaka', 'あやか', '中田', 'ayaka.nakata@example.com', '2021-10-12', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('kaito', 'かいと', '近藤', 'kaito.kondo@example.com', '2018-01-30', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('saki', 'さき', '石原', 'saki.ishihara@example.com', '2019-11-22', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('yukiha', 'ゆきは', '高野', 'yukiha.takano@example.com', '2022-03-14', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('shun', 'しゅん', '田島', 'shun.tajima@example.com', '2021-08-28', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1),
+    ('taku', 'たく', '大西', 'taku.onishi@example.com', '2022-05-06', '{bcrypt}$2a$12$ctoibXEWawP.Kb9XkK5Ilelfm8A7KQHGw1dn2LgaAZtlDE7wrkvre', 1);
+
+-- Insert roles for new instructors
+INSERT INTO roles (instructor_id, role_name)
+VALUES
+    ('tomoya', '講師'),
+    ('yoko', '講師'),
+    ('daisuke', '講師'),
+    ('jun', '講師'),
+    ('ayaka', '講師'),
+    ('kaito', '講師'),
+    ('saki', '講師'),
+    ('yukiha', '講師'),
+    ('shun', '講師'),
+    ('taku', '管理者');
+
+-- Link new courses and departments (ensuring 3 departments)
+INSERT INTO course_departments (course_id, department_id)
+VALUES
+    (4, 1),  -- 生物学 to 科学部
+    (5, 3),  -- 日本史 to 人文学部
+    (6, 2),  -- 統計学 to 工学部
+    (7, 1),  -- 化学 to 科学部
+    (8, 3),  -- 哲学 to 人文学部
+    (9, 2),  -- 機械工学 to 工学部
+    (10, 1), -- 経済学 to 科学部
+    (11, 3), -- 言語学 to 人文学部
+    (12, 2), -- 心理学 to 工学部
+    (13, 2); -- 情報技術 to 工学部
+
+-- Assign new instructors to courses
+INSERT INTO course_instructors (course_id, instructor_id)
+VALUES
+    (4, 'tomoya'),  -- Tomoya teaching 生物学
+    (5, 'yoko'),    -- Yoko teaching 日本史
+    (6, 'daisuke'), -- Daisuke teaching 統計学
+    (7, 'jun'),     -- Jun teaching 化学
+    (8, 'ayaka'),   -- Ayaka teaching 哲学
+    (9, 'kaito'),   -- Kaito teaching 機械工学
+    (10, 'saki'),   -- Saki teaching 経済学
+    (11, 'yukiha'), -- Yukiha teaching 言語学
+    (12, 'shun'),   -- Shun teaching 心理学
+    (13, 'taku');   -- Taku teaching 情報技術
+
+-- Enroll additional students in courses (no NULL values)
+INSERT INTO enrollments (student_id, course_id)
+VALUES
+    (4, 4),  -- Kazumi enrolled in 生物学
+    (5, 5),  -- Kenji enrolled in 日本史
+    (6, 6),  -- Erika enrolled in 統計学
+    (7, 7),  -- Yuta enrolled in 化学
+    (8, 8),  -- Mayu enrolled in 哲学
+    (9, 9),  -- Satoru enrolled in 機械工学
+    (10, 10),-- Kanae enrolled in 経済学
+    (4, 11), -- Kazumi enrolled in 言語学
+    (5, 12), -- Kenji enrolled in 心理学
+    (6, 13);-- Erika enrolled in 情報技術
