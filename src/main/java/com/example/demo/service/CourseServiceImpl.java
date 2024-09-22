@@ -21,20 +21,20 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDTO> findCourseWithDepartmentName() {
         List<Object[]> results = courseRepository.findCourseWithDepartmentName();
-
         List<CourseDTO> courses = new ArrayList<>();
 
         for (Object[] row : results) {
-            Integer courseId = (row[0] != null) ? ((Number) row[0]).intValue() : null;
+            Integer courseId = (row[0] != null) ? ((Number) row[0]).intValue() : null; // This will now work
             String courseName = (row[1] != null) ? (String) row[1] : "";
             String departmentName = (row[2] != null) ? (String) row[2] : "";
 
-            if(courseId != null) {
+            if (courseId != null) {
                 courses.add(new CourseDTO(courseId, courseName, departmentName));
             }
         }
         return courses;
     }
+
 }
 
 
