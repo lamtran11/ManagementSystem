@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const departmentSelect = document.getElementById("department");
 
             departments.forEach(department => {
+                
                 const option = document.createElement("option");
+
                 option.value = department.departmentId;
                 option.textContent = department.departmentName;
                 departmentSelect.appendChild(option);
@@ -29,11 +31,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 const label = document.createElement("label");
                 label.htmlFor = `course-${course.courseName}`;
-                label.textContent = `${course.courseName} (${course.department_name}`;
+                label.textContent = `${course.courseName} (${course.departmentName})`;
 
                 courseContainer.appendChild(checkBox);
                 courseContainer.appendChild(label);
-                courseContainer.appendChild(document.createElement("br"));
+                courseContainer.appendChild(document.createElement("br"))
+        .catch(error => {
+            console.error("Error fetching courses:", error);
+        });
 
         })
     });
