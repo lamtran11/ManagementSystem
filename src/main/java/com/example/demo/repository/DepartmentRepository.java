@@ -6,6 +6,7 @@ import org.springframework.data.relational.core.sql.In;
 
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
+	Department findByDepartmentName(String departmentName);
 
 }
 

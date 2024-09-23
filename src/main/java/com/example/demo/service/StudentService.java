@@ -13,6 +13,6 @@ public interface StudentService {
 
     Student getStudentByEmail(String email);
     
-//    List<StudentInformation> saveAllStudentFormData(List<StudentInformation> studentData);
+    List<StudentInformation> saveAllStudentFormData(List<StudentInformation> studentData);
 }
 

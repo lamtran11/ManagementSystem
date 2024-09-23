@@ -22,4 +22,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
             "GROUP BY S.student_id, S.first_name, S.last_name, S.email, D.department_name ",
             nativeQuery = true)
     List<Object[]> findStudentCourseEnrollments();
+    
+    Student findByEmail(String email);
+    
+    
 }

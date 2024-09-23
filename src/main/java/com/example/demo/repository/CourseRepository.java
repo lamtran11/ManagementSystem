@@ -19,5 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     nativeQuery = true)
 	List<Object[]> findCourseWithDepartmentName();
 
+	
+	 Course findByCourseName(String courseName);
     
 }	

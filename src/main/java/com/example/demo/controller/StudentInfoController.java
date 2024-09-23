@@ -37,6 +37,8 @@ public class StudentInfoController {
     public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
     }
+    
+    
 
 }
 
