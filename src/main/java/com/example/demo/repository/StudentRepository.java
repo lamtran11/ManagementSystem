@@ -1,14 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.dto.StudentInformation;
-import com.example.demo.model.Student;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.model.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
@@ -22,9 +20,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
             "LEFT JOIN Course_Departments CD ON CD.course_id = C.course_id " +
             "LEFT JOIN Departments D ON CD.department_id = D.department_id " +
             "GROUP BY S.student_id, S.first_name, S.last_name, S.email, D.department_name ",
-
             nativeQuery = true)
-
     List<Object[]> findStudentCourseEnrollments();
-
 }
