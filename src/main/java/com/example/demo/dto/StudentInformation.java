@@ -1,74 +1,83 @@
 package com.example.demo.dto;
 
-public class StudentInformation {
+import java.util.List;
 
-    private int studentId;
+public class StudentInformation {
+    private Integer studentId;
     private String firstName;
     private String lastName;
     private String email;
+    private String address;
     private String departmentName;
-    private String courseName;
-    
-    public StudentInformation() {}
-    
-    public StudentInformation(int studentId, String firstName, String lastName, String email, String departmentName, String courseName) {
-    	this.studentId = studentId;
+    private List<String> courseNames;
+
+    // Constructor with all the fields
+    public StudentInformation(Integer studentId, String firstName, String lastName, String email, 
+                              String address, String departmentName, List<String> courseNames) {
+        this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
         this.departmentName = departmentName;
-        this.courseName = courseName;
+        this.courseNames = courseNames;
     }
 
-	public int getStudentId() {
-		return studentId;
-	}
+    // Getters and setters (if necessary)
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
-	}
+    public Integer getStudentId() {
+        return studentId;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getDepartmentName() {
-		return departmentName;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getCourseName() {
-		return courseName;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-    
-    
+    public String getDepartmentName() {
+        return departmentName;
+    }
 
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
+    public List<String> getCourseNames() {
+        return courseNames;
+    }
+
+    public void setCourseNames(List<String> courseNames) {
+        this.courseNames = courseNames;
+    }
 }

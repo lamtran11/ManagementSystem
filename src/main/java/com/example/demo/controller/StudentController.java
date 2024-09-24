@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.StudentInformation;
-import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 
 @RestController
@@ -32,7 +31,7 @@ public class StudentController {
     }
     
     @PostMapping("/saveStudentFormData")
-    public List<StudentInformation> saveStudentFormData(@RequestBody List<StudentInformation> studentData) {
+    public StudentInformation saveStudentFormData(@RequestBody StudentInformation studentData) {
         return studentService.saveAllStudentFormData(studentData);
     }
    
