@@ -30,12 +30,16 @@ fetch('http://localhost:8080/api/student/findAll')
             emailCell.textContent = entry.email || '...';
             row.appendChild(emailCell);
 
+            const addressCell = document.createElement('td');
+            addressCell.textContent = entry.address || '...';
+            row.appendChild(addressCell);
+
             const departmentCell = document.createElement('td');
             departmentCell.textContent = entry.departmentName || '...';
             row.appendChild(departmentCell);
 
             const courseCell = document.createElement('td');
-            courseCell.textContent = entry.courseName || '...';
+            courseCell.textContent = entry.courseNames.join(', ') || '...';
             row.appendChild(courseCell);
 
             studentTable.appendChild(row);

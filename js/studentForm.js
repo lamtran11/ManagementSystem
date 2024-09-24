@@ -77,6 +77,8 @@ document.getElementById('student-register').addEventListener("submit" , function
         courseName: Array.from(document.querySelectorAll('input[name="course"]:checked')).map(course => course.value)
     }];
 
+    console.log(studentData);
+
     fetch("http://localhost:8080/api/student/saveStudentFormData", {
         method: "POST",
         headers: {
