@@ -1,17 +1,22 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "students")
 public class Student {
-    //represent the core user information that is necessary for authentication and authorization.
-    //Implement this interface is key for custom how user information is retrieved and used within security context in this app
 
-    // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
@@ -34,10 +39,13 @@ public class Student {
 
     @Column(name = "created_at")
     private LocalDate createdAt;
+    
+    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL)
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Student() {
-
     }
+
     public Student(int studentId, String firstName, String lastName, String email, LocalDate birthdate, String address, LocalDate createdAt) {
         this.studentId = studentId;
         this.firstName = firstName;
@@ -48,7 +56,7 @@ public class Student {
         this.createdAt = createdAt;
     }
 
-    // getters and setters
+    // Getters and setters
 
     public int getStudentId() {
         return studentId;
@@ -106,6 +114,10 @@ public class Student {
         this.createdAt = createdAt;
     }
 
+    public List<Enrollment> getEnrollments() { // Add this getter
+        return enrollments;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -118,6 +130,4 @@ public class Student {
                 ", createdAt=" + createdAt +
                 '}';
     }
-
-
 }

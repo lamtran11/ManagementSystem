@@ -1,8 +1,15 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "enrollments")
@@ -11,57 +18,70 @@ public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "enrollment_id")
-    private int enrollment_id;
+    private int enrollmentId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id")
-    private Student studentId;
+    @ManyToOne
+    @JoinColumn(name = "studentId", nullable = false) // Ensure student_id cannot be null
+    private Student student; // Use a more descriptive variable name
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "course_id")
-    private Course courseId;
+    @ManyToOne
+    @JoinColumn(name = "courseId", nullable = false) // Ensure course_id cannot be null
+    private Course course; // Use a more descriptive variable name
 
-    @Column(name = "enrollment_date")
-    private LocalDate enrollmentDate;
+    @Column(name = "enrollment_date", nullable = false) // Ensure enrollment_date cannot be null
+    private LocalDateTime enrollmentDate;
 
-    public Enrollment() {}
+    // Default constructor
+    public Enrollment() {
+    }
 
-    public Enrollment(int enrollment_id, Student studentId, Course courseId, LocalDate enrollmentDate) {
-        this.enrollment_id = enrollment_id;
-        this.studentId = studentId;
-        this.courseId = courseId;
+    // Constructor with parameters
+    public Enrollment(Student student, Course course, LocalDateTime enrollmentDate) {
+        this.student = student;
+        this.course = course;
         this.enrollmentDate = enrollmentDate;
     }
 
-    public int getEnrollment_id() {
-        return enrollment_id;
+    // Getters and setters
+    public int getEnrollmentId() {
+        return enrollmentId;
     }
 
-    public void setEnrollment_id(int enrollment_id) {
-        this.enrollment_id = enrollment_id;
+    public void setEnrollmentId(int enrollmentId) {
+        this.enrollmentId = enrollmentId;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public Course getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Course courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public LocalDate getEnrollmentDate() {
+    public LocalDateTime getEnrollmentDate() {
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(LocalDate enrollmentDate) {
+    public void setEnrollmentDate(LocalDateTime enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Enrollment{" +
+                "enrollmentId=" + enrollmentId +
+                ", student=" + student +
+                ", course=" + course +
+                ", enrollmentDate=" + enrollmentDate +
+                '}';
     }
 }

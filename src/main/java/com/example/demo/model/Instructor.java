@@ -1,37 +1,50 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "instructors")
 public class Instructor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
     @Column(name = "instructor_id")
     private String instructorId;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "hire_date")
     private LocalDate hireDate;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "active", nullable = false)
+    private short active;
+
     @Column(name = "created_at")
+    @CreationTimestamp
     private LocalDate createdAt;
 
-    @Column(name="password")
-    private String password;
+    // Relationship with Courses (Many instructors can teach many courses)
+    @ManyToMany(mappedBy = "instructors")
+    private List<Course> courses = new ArrayList<>();
 
     public Instructor() {}
 

@@ -1,8 +1,16 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import java.time.LocalDate;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "course_departments")
@@ -22,24 +30,13 @@ public class CourseDepartment {
     private Department departmentId;
 
     @Column(name = "assigned_date")
-    private LocalDate assignedDate;
+    private LocalDateTime assignedDate = LocalDateTime.now();
 
     public CourseDepartment() {}
 
-    public CourseDepartment(int courseDepartmentId, Course courseId, Department departmentId, LocalDate assignedDate) {
-        this.courseDepartmentId = courseDepartmentId;
+    public CourseDepartment(Course courseId, Department departmentId) {
         this.courseId = courseId;
         this.departmentId = departmentId;
-        this.assignedDate = assignedDate;
-    }
-
-
-    public int getCourseDepartmentId() {
-        return courseDepartmentId;
-    }
-
-    public void setCourseDepartmentId(int courseDepartmentId) {
-        this.courseDepartmentId = courseDepartmentId;
     }
 
     public Course getCourseId() {
@@ -58,11 +55,4 @@ public class CourseDepartment {
         this.departmentId = departmentId;
     }
 
-    public LocalDate getAssignedDate() {
-        return assignedDate;
-    }
-
-    public void setAssignedDate(LocalDate assignedDate) {
-        this.assignedDate = assignedDate;
-    }
 }

@@ -1,8 +1,16 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "departments")
@@ -17,11 +25,14 @@ public class Department {
     private String departmentName;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
+    
+    @OneToMany(mappedBy = "department")
+    private List<Course> courses = new ArrayList<>();
 
     public Department() {}
 
-    public Department(int departmentId, String departmentName, LocalDate createdAt) {
+    public Department(int departmentId, String departmentName, LocalDateTime createdAt) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.createdAt = createdAt;
@@ -43,11 +54,11 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

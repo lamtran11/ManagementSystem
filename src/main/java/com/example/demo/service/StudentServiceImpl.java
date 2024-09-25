@@ -68,9 +68,8 @@ public class StudentServiceImpl implements StudentService {
     }
     
     @Override
-    public StudentInformation saveAllStudentFormData(StudentInformation studentData) {
-       
-    	return null;
+	public Student saveStudent(Student student) {
+        return studentRepository.save(student);
     }
 
 
