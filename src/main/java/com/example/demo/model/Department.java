@@ -28,6 +28,9 @@ public class Department {
     private LocalDateTime createdAt;
     
     @OneToMany(mappedBy = "department")
+    private List<Student> students;
+    
+    @OneToMany(mappedBy = "department")
     private List<Course> courses = new ArrayList<>();
 
     public Department() {}

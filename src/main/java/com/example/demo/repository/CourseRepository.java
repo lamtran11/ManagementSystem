@@ -20,6 +20,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 	List<Object[]> findCourseWithDepartmentName();
 
 	
-	 Course findByCourseName(String courseName);
+	Course findByName(String courseName);
     
 }	

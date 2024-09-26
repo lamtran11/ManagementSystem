@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -36,24 +38,38 @@ public class Student {
 
     @Column(name = "address")
     private String address;
-
-    @Column(name = "created_at")
-    private LocalDate createdAt;
     
-    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Enrollment> enrollments = new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
-    public Student() {
+
+    public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public void setEnrollments(List<Enrollment> enrollments) {
+		this.enrollments = enrollments;
+	}
+
+	public Student() {
     }
 
-    public Student(int studentId, String firstName, String lastName, String email, LocalDate birthdate, String address, LocalDate createdAt) {
+    public Student(int studentId, String firstName, String lastName, String email, LocalDate birthdate, String address) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthdate = birthdate;
         this.address = address;
-        this.createdAt = createdAt;
+ 
     }
 
     // Getters and setters
@@ -106,14 +122,6 @@ public class Student {
         this.address = address;
     }
 
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public List<Enrollment> getEnrollments() { // Add this getter
         return enrollments;
     }
@@ -127,7 +135,6 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", birthdate=" + birthdate +
                 ", address='" + address + '\'' +
-                ", createdAt=" + createdAt +
                 '}';
     }
 }

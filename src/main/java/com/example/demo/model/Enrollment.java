@@ -26,7 +26,7 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "courseId", nullable = false) // Ensure course_id cannot be null
-    private Course course; // Use a more descriptive variable name
+    private Course courseId; // Use a more descriptive variable name
 
     @Column(name = "enrollment_date", nullable = false) // Ensure enrollment_date cannot be null
     private LocalDateTime enrollmentDate;
@@ -36,9 +36,9 @@ public class Enrollment {
     }
 
     // Constructor with parameters
-    public Enrollment(Student student, Course course, LocalDateTime enrollmentDate) {
+    public Enrollment(Student student, Course courseId, LocalDateTime enrollmentDate) {
         this.student = student;
-        this.course = course;
+        this.courseId = courseId;
         this.enrollmentDate = enrollmentDate;
     }
 
@@ -60,11 +60,11 @@ public class Enrollment {
     }
 
     public Course getCourse() {
-        return course;
+        return courseId;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Course courseId) {
+        this.courseId = courseId;
     }
 
     public LocalDateTime getEnrollmentDate() {
@@ -80,7 +80,7 @@ public class Enrollment {
         return "Enrollment{" +
                 "enrollmentId=" + enrollmentId +
                 ", student=" + student +
-                ", course=" + course +
+                ", course=" + courseId +
                 ", enrollmentDate=" + enrollmentDate +
                 '}';
     }
