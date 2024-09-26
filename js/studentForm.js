@@ -51,17 +51,17 @@ function loadCoursesByDepartment(departmentName) {
 }
 
 // Event listener to load courses when a department is selected
-document.getElementById("department").addEventListener("change", function() {
-    const selectedDepartment = this.value;
-    if (selectedDepartment) {
-        loadCoursesByDepartment(selectedDepartment);
-    } else {
-        document.getElementById("course-container").innerHTML = "";  // Clear courses if no department selected
-    }
-});
+// document.getElementById("department").addEventListener("change", function() {
+//     const selectedDepartment = this.value;
+//     if (selectedDepartment) {
+//         loadCoursesByDepartment(selectedDepartment);
+//     } else {
+//         document.getElementById("course-container").innerHTML = "";  // Clear courses if no department selected
+//     }
+// });
 
-// Initial load of departments
-loadDepartments();
+// // Initial load of departments
+// loadDepartments();
 
 
 document.getElementById('student-register').addEventListener("submit" , function(event) {
@@ -72,9 +72,11 @@ document.getElementById('student-register').addEventListener("submit" , function
         firstName: document.getElementById('firstName').value,
         lastName: document.getElementById('lastName').value,
         email: document.getElementById('email').value,
+        birthDate: document.getElementById('birthdate').value,
         address: document.getElementById('address').value,
         departmentName: document.getElementById('department').value,
-        courseName: Array.from(document.querySelectorAll('input[name="course"]:checked')).map(course => course.value)
+        courseName: Array.from(document.querySelectorAll('input[name="course"]:checked'))
+                        .map(course => course.value)
     }];
 
     console.log(studentData);
