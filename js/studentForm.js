@@ -65,7 +65,7 @@ function loadCoursesByDepartment(departmentName) {
 
 
 document.getElementById('student-register').addEventListener("submit" , function(event) {
-
+    
     event.preventDefault(); //prevent default submit event
 
     const studentData = [{
@@ -98,6 +98,7 @@ document.getElementById('student-register').addEventListener("submit" , function
         // You can add error handling logic here
     });
 });
+
 
 
 
