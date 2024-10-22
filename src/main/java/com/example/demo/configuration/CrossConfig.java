@@ -9,12 +9,14 @@ public class CrossConfig implements WebMvcConfigurer {
 
 	// Add CORS configuration here
 	public void addCorMapping(CorsRegistry registry) {
-		
+
 		registry.addMapping("/**")
-				.allowedOrigins("*")
+				.allowedOrigins("http://127.0.0.1:5500")
 				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-        // Add more allowed origins if needed. For example,
-		
 	}
-	
+
 }
+
+
+
+

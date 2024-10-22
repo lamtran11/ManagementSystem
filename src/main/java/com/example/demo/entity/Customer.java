@@ -15,6 +15,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="customer")
 public class Customer {
@@ -35,6 +37,7 @@ public class Customer {
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinTable(name = "customer_book", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+	@JsonBackReference // Prevents infinite loop during serialization
 	private List<Book> books;
 	
 	

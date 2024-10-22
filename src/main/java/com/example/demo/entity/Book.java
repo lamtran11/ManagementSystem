@@ -16,7 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Book")
@@ -33,17 +34,18 @@ public class Book {
     private String title;
 	
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+	@ManyToOne( 
+			   cascade = {CascadeType.PERSIST, CascadeType.MERGE,
 						  CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "shop_id") 
-    @JsonBackReference // Prevents infinite loop during serialization
+//    @JsonBackReference // Prevents infinite loop during serialization
 	private Shop shop;
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "book_id")  
+	@JsonManagedReference // Prevents infinite loop during serialization
 	private List<Review> reviews;
-	
 	
 	
     @ManyToMany(fetch = FetchType.LAZY, 
@@ -52,8 +54,10 @@ public class Book {
     @JoinTable(name = "customer_book", 
     		   joinColumns = @JoinColumn(name = "book_id"), 
                inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    @JsonIgnore // Prevents infinite loop during serialization
 	private List<Customer> customers;
 	
+    
 	// define constructors
     public Book() {
     }
