@@ -30,10 +30,9 @@ table {
     gap: 10px; /* Space between buttons */
     float:right;
 }
-.student-list-button {
+.customer-list-button {
     padding: 10px 20px;
     border: none;
-    color: white;
     cursor: pointer;
 }
 #logout-button {

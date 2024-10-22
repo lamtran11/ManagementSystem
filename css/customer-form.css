@@ -12,7 +12,7 @@ h1 {
   margin-top: 20px;
 }
 
-.student-register-form-container {
+.customer-register-form-container {
   max-width: 600px;
   background-color: white;
   padding: 20px;
@@ -40,21 +40,22 @@ select {
   font-size: 1rem;
 }
 
-.course-container {
+.book-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.course-container label {
+/* .book-container label {
   margin-right: 20px;
   margin-bottom: 15px;
-}
+} */
 
-.course-container input {
+.book-container input {
   margin-right: 10px;
   padding: 10px; /* Adding padding to checkbox */
   transform: scale(1.5); /* Scale the checkbox to make it larger */
 }
+
 
 button[type="submit"] {
   width: 100%;

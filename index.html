@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/studentList.css" />
-    <title>生徒リスト</title>
+    <link rel="stylesheet" href="/css/customerList.css" />
+    <title>顧客リスト</title>
   </head>
   <body>
     <!-- Table for displaying student list -->
@@ -17,14 +17,14 @@
       </a>
   </div> -->
 
-    <h2>生徒リスト</h2>
+    <h2>顧客リスト</h2>
 
-    <a href="/form/student-form.html">
-      <button id="add-student-button" class="student-list-button">
-          生徒追加
+    <a href="/form/">
+      <button id="add-customer-button" class="customer-list-button">
+         顧客追加
       </button>
     </a>
-
+    
     <table>
       <thead>
         <tr>
@@ -32,18 +32,18 @@
           <th>姓</th>
           <th>名</th>
           <th>メール</th>
-          <th>住所</th>
-          <th>学部</th>
+          <th>購入済本数</th>
+          <!-- <th>学部</th>
           <th>コース</th>
           <th>詳し情報</th>
-          <th>アクション</th>
+          <th>アクション</th> -->
         </tr>
       </thead>
-      <tbody id="studentTableBody">
+      <tbody id="customerTableBody">
         <!-- Employee data will be loaded here dynamically -->
       </tbody>
     </table>
 
-    <script src="/js/studentList.js"></script>
+    <script src="/js/customerList.js"></script>
   </body>
 </html>
